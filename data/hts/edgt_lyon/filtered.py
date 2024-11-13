@@ -45,9 +45,20 @@ def execute(context):
         df_households = df_households[df_households["household_id"].isin(df_persons["household_id"])]
 
     # Finish up
-    df_households = df_households[hts.HOUSEHOLD_COLUMNS]
+    additional_household_columns = []
+    if "zone_id" in df_households.columns:
+        additional_household_columns += ["zone_id"]
+    df_households = df_households[hts.HOUSEHOLD_COLUMNS + additional_household_columns]
+
     df_persons = df_persons[hts.PERSON_COLUMNS]
-    df_trips = df_trips[hts.TRIP_COLUMNS + ["routed_distance", "euclidean_distance"]]
+    
+    additional_trip_columns = ["routed_distance", "euclidean_distance"]
+    if "origin_zone_id" in df_trips.columns:
+        additional_trip_columns += ["origin_zone_id"]
+    if "destination_zone_id" in df_trips.columns:
+        additional_trip_columns += ["destination_zone_id"]
+    df_trips = df_trips[hts.TRIP_COLUMNS + additional_trip_columns]
+
 
     hts.check(df_households, df_persons, df_trips)
     return df_households, df_persons, df_trips

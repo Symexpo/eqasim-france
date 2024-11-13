@@ -13,7 +13,7 @@ def execute(context):
         "building_id", "housing", "geometry"]]
     
     df_locations = context.stage("synthesis.locations.home.locations")[[
-        "location_id", "weight", "building_id", "geometry"]]
+        "location_id", "weight", "fake", "iris_id", "commune_id", "geometry"]]
 
     # Write into same file with multiple layers
     df_buildings.to_file("%s/%shousing.gpkg" % (

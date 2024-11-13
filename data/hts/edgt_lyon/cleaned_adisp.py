@@ -20,10 +20,11 @@ PURPOSE_MAP = {
 }
 
 MODES_MAP = {
-    "car": [10, 13, 15, 21, 81], # 10 is (driving) an ambulance
-    "car_passenger": [14, 16, 22, 82],
+    "car": [10, 21, 81], # 10 is (driving) an ambulance
+    "motorcycle": [13, 15, 17],
+    "car_passenger": [14, 16, 18, 22, 82],
     "pt": [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 51, 52, 53, 61, 71, 91, 92, 94, 95],
-    "bike": [11, 17, 12, 18, 93],
+    "bike": [11, 12, 93],
     "walk": [1, 2] # Actually, 2 is not really explained, but we assume it is walk
 }
 
@@ -39,6 +40,7 @@ def execute(context):
     # Attention, some households get lost here!
     df_households = pd.merge(df_households, df_spatial, on = "ZFM", how = "left")
     df_households["departement_id"] = df_households["departement_id"].fillna("unknown")
+    df_households["zone_id"] = df_households["ZFM"]
 
     # Transform original IDs to integer (they are hierarchichal)
     df_households["edgt_household_id"] = (df_households["ZFM"] + df_households["ECH"]).astype(int)
@@ -82,6 +84,7 @@ def execute(context):
     df_size = df_persons.groupby("household_id").size().reset_index(name = "household_size")
     df_households = pd.merge(df_households, df_size, on = "household_id")
 
+
     # Clean departement
     df_trips = pd.merge(df_trips, df_spatial.rename(columns = {
         "ZFM": "D3", "departement_id": "origin_departement_id"
@@ -93,6 +96,8 @@ def execute(context):
 
     df_trips["origin_departement_id"] = df_trips["origin_departement_id"].fillna("unknown")
     df_trips["destination_departement_id"] = df_trips["destination_departement_id"].fillna("unknown")
+    df_trips["origin_zone_id"] = df_trips["D3"]
+    df_trips["destination_zone_id"] = df_trips["D7"]
 
     df_households["departement_id"] = df_households["departement_id"].astype("category")
     df_persons["departement_id"] = df_persons["departement_id"].astype("category")
