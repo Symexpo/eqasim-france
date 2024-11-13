@@ -38,7 +38,7 @@ RUN java -version && \
     conda --version && \
     which osmosis
 
-COPY ./environment.yml /tmp/environment_eqasim.yml
+COPY ../environment.yml /tmp/environment_eqasim.yml
 
 # Copy the environment.yml file into the container if env_path is set (else will create an empty directory)
 COPY ${env_path} /tmp/environment_custom.yml
