@@ -12,12 +12,16 @@ run:
 # Here the configuraiton of the pipeline starts
 config:
 
-  ### Some general configuration
+  ##############################
+  # Some general configuration #
+  ##############################
   
   ## Number of CPUs to use
   processes: 4
 
-  ### Random seeds
+  ################
+  # Random seeds #
+  ################
   
   ## global random seed for the output population
   random_seed: 1234
@@ -25,10 +29,15 @@ config:
   ## bpe specific random seed when impute missing coordinates for known IRIS
   # bpe_random_seed: 0
   
-  ### Define sampling rate for the output population
+  ##################################################
+  # Define sampling rate for the output population #
+  ##################################################
+  
   sampling_rate: 0.001
 
-  ### household travel survey (HTS)
+  #################################
+  # household travel survey (HTS) #
+  #################################
 
   ## Define whether to use ENTD or EGT as the HTS
   hts: entd # entd, egt, edgt_lyon, edgt_44
@@ -39,7 +48,9 @@ config:
   ## if selected, chose the source for edgt_lyon
   # edgt_lyon_source: unchosen # unchosen, adisp, cerema
 
-  ### Zone selection
+  ##################
+  # Zone selection #
+  ##################
 
   ## select regions by region_id
   # regions: [11]
@@ -47,7 +58,9 @@ config:
   ## select departments by department_id
   # departments: []
     
-  ### Output paths
+  #######################
+  #     Output paths    #
+  #######################
   
   ## output folder
   output_path: output
@@ -58,7 +71,9 @@ config:
   ## file formats that should be exported
   # output_formats: ["csv", "gpkg"] # ["csv", "gpkg", "parquet", "geoparquet"]
 
-  ### Algorithms configurations
+  ##############################
+  #  Algorithms configurations #
+  ##############################
 
   ## Use the bhepop2 package for attributing income
   # income_assignation_method: bhepop2 # uniform, bhepop2
@@ -104,7 +119,9 @@ config:
   ## creating the far or not
   # write_jar: true
 
-  ### Analysis configuration
+  ############################
+  #  Analysis configuration  #
+  ############################
 
   ## Whether to use previously generated files or not
   # analysis_from_file: false
@@ -112,7 +129,9 @@ config:
   ## prefix of the files to compare to
   # comparison_file_prefix: other_
 
-  ### Tools configuration
+  ##########################
+  #  Tools configuration   #
+  ##########################
 
   ## Mostly interesting if you run the simulation, or you activate the `mode_choice` option,
 
@@ -139,10 +158,13 @@ config:
 
   ## Strategy to use in pt2matsim gtfs processing
   # gtfs_date: dayWithMostServices
+
   ## Export the detailed geometry of the network before simplification in pt2matsim
   # export_detailed_network: true
 
-  ### Input paths
+  #################
+  #  Input paths  #
+  #################
 
   ## Absolute root path of all input data
   data_path: /path/to/my/data
@@ -173,7 +195,7 @@ config:
   # od_pro_csv: FD_MOBPRO_2019.csv
   # od_sco_csv: FD_MOBSCO_2019.csv
   
-  # ## external education locations file
+  ## external education locations file
   # education_file: education/education_addresses.geojson
 
   # osm_path: osm_idf
@@ -190,7 +212,7 @@ config:
   # population_xlsx: base-ic-evol-struct-pop-2019.xlsx
   # population_year: 19
 
-  # # population projections
+  ## population projections
   # projection_path: projection_2021
   # projection_scenario: 00_central
   # projection_year: 2030
